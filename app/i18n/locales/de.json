@@ -1,0 +1,23 @@
+{
+    "app": {
+        "name": "wandelhalle.org"
+    },
+    "links": {
+        "register": {
+            "label": "Registrieren",
+            "slug": "/register"
+        },
+        "login": {
+            "label": "Anmelden",
+            "slug": "/login"
+        },
+        "questions": {
+            "label": "Fragen",
+            "slug": "/questions"
+        },
+        "topics": {
+            "label": "Themen",
+            "slug": "/topics"
+        }
+    }
+}

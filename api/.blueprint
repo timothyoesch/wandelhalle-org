@@ -1,0 +1,40 @@
+created:
+    - database/factories/CantonFactory.php
+    - database/factories/PartyFactory.php
+    - database/factories/CouncilFactory.php
+    - database/factories/PoliticianFactory.php
+    - database/factories/MandateFactory.php
+    - database/factories/TopicFactory.php
+    - database/factories/QuestionFactory.php
+    - database/factories/AnswerFactory.php
+    - database/factories/VoteFactory.php
+    - database/migrations/2026_03_23_185915_create_cantons_table.php
+    - database/migrations/2026_03_23_185916_create_parties_table.php
+    - database/migrations/2026_03_23_185917_create_councils_table.php
+    - database/migrations/2026_03_23_185918_create_politicians_table.php
+    - database/migrations/2026_03_23_185919_create_mandates_table.php
+    - database/migrations/2026_03_23_185920_create_topics_table.php
+    - database/migrations/2026_03_23_185921_create_questions_table.php
+    - database/migrations/2026_03_23_185922_create_answers_table.php
+    - database/migrations/2026_03_23_185923_create_votes_table.php
+    - database/migrations/2026_03_23_185924_create_question_topic_table.php
+    - app/Models/Canton.php
+    - app/Models/Party.php
+    - app/Models/Council.php
+    - app/Models/Politician.php
+    - app/Models/Mandate.php
+    - app/Models/Topic.php
+    - app/Models/Question.php
+    - app/Models/Answer.php
+    - app/Models/Vote.php
+models:
+    User: { name: string, email: string, email_verified_at: 'timestamp nullable', password: string, remember_token: 'string:100 nullable' }
+    Canton: { name: json, abbreviation: 'string length:2 unique', relationships: { hasMany: Politician } }
+    Party: { name: json, abbreviation: 'json nullable', color: "string default:'#9CA3AF'", relationships: { hasMany: Mandate } }
+    Council: { name: json, type: string, relationships: { hasMany: Mandate } }
+    Politician: { canton_id: 'id nullable', name: string, slug: 'string unique', bio: 'text nullable', avatar_url: 'string nullable', relationships: { belongsTo: Canton, hasMany: 'Mandate, Question, Answer' } }
+    Mandate: { politician_id: id, party_id: id, council_id: id, type: "enum('candidate', 'elected') default:'candidate'", start_date: 'date nullable', end_date: 'date nullable', is_active: 'boolean default:true', relationships: { belongsTo: 'Politician, Party, Council' } }
+    Topic: { name: json, slug: json, relationships: { belongsToMany: Question } }
+    Question: { user_id: id, politician_id: id, subject: 'string nullable', body: text, status: "enum('pending', 'published', 'rejected') default:'pending'", published_at: 'timestamp nullable', relationships: { belongsTo: 'User, Politician', hasMany: 'Answer, Vote', belongsToMany: Topic } }
+    Answer: { question_id: id, politician_id: id, body: text, status: "enum('pending', 'published') default:'published'", relationships: { belongsTo: 'Question, Politician' } }
+    Vote: { user_id: id, question_id: id, relationships: { belongsTo: 'User, Question' } }

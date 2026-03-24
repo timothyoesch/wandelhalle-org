@@ -1,0 +1,21 @@
+name: wandelhalle
+
+recipe: laravel
+config:
+  webroot: api/public
+  php: '8.5'
+  database: mysql
+
+services:
+  app:
+    type: node:24
+    ssl: true
+    build:
+      - cd app && npm install
+    command: cd app && HOST=0.0.0.0 PORT=80 npm run dev
+
+proxy:
+  appserver:
+    - api.wandelhalle.lndo.site
+  app:
+    - app.wandelhalle.lndo.site
