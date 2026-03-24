@@ -12,7 +12,7 @@ services:
     ssl: true
     build:
       - cd app && npm install
-    command: cd app && HOST=0.0.0.0 PORT=80 npm run dev
+    command: cd app && NODE_TLS_REJECT_UNAUTHORIZED=0 HOST=0.0.0.0 PORT=80 npm run dev
 
 proxy:
   appserver:

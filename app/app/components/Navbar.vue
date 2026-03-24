@@ -1,3 +1,11 @@
+<script setup>
+const {user, isAuthenticated, logout} = useSanctumAuth()
+const localePath = useLocalePath()
+async function handleLogout() {
+    await logout()
+    return navigateTo(localePath('/login'))
+}
+</script>
 <template>
     <nav class="waha-navbar py-2 border-b-2 border-accent">
         <div class="waha-navbar__container px-4 md:px-8">
@@ -14,30 +22,50 @@
                         </NuxtLink>
                     </div>
                     <div class="waha-navbar__links flex gap-2 flex-col items-end">
-                        <div class="waha-navbar__links__upper flex text-xs gap-4">
-                            <NuxtLink :to="$t('links.register.slug')">
-                                {{ $t('links.register.label') }}
+                        <div class="waha-navbar__links__upper flex text-xs md:text-sm gap-4">
+                            <NuxtLink
+                                :to="$localePath('/register')"
+                                v-if="!isAuthenticated"
+                            >
+                                {{ $t('links.register') }}
                             </NuxtLink>
-                            <NuxtLink :to="$t('links.login.slug')">
-                                {{ $t('links.login.label') }}
+                            <NuxtLink
+                                :to="$localePath('/login')"
+                                v-if="!isAuthenticated"
+                            >
+                                {{ $t('links.login') }}
                             </NuxtLink>
+                            <NuxtLink
+                                :to="$localePath('/profile')"
+                                class="flex items-center gap-x-1"
+                                v-if="isAuthenticated"
+                            >
+                                {{ user.name }}
+                                <Icon class="text-xl" name="heroicons:user-circle-20-solid" />
+                            </NuxtLink>
+                            <button
+                                @click="handleLogout"
+                                v-if="isAuthenticated"
+                            >
+                                {{ $t('links.logout') }}
+                            </button>
                         </div>
-                        <div class="waha-navbar__links__lower flex font-bold gap-6">
+                        <div class="waha-navbar__links__lower flex font-bold gap-6 text-xl md:text-2xl">
                             <NuxtLink
-                                :to="$t('links.questions.slug')"
+                                :to="$localePath('/questions')"
                                 :class="{
-                                    'text-accent': $route.path.indexOf($t('links.questions.slug')) != -1,
+                                    'text-accent': $route.path.indexOf($localePath('/questions')) != -1,
                                 }"
                             >
-                                {{ $t('links.questions.label') }}
+                                {{ $t('links.questions') }}
                             </NuxtLink>
                             <NuxtLink
-                                :to="$t('links.topics.slug')"
+                                :to="$localePath('/topics')"
                                 :class="{
-                                    'text-accent': $route.path.indexOf($t('links.topics.slug')) != -1,
+                                    'text-accent': $route.path.indexOf($localePath('/topics')) != -1,
                                 }"
                             >
-                                {{ $t('links.topics.label') }}
+                                {{ $t('links.topics') }}
                             </NuxtLink>
                         </div>
                     </div>

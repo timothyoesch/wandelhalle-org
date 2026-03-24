@@ -1,6 +1,6 @@
 <script setup>
 const { locale, setLocale } = useI18n()
-setLocale("de")
+setLocale(locale.value)
 </script>
 <template>
   <NuxtLayout>

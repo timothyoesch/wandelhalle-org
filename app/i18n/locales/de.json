@@ -3,21 +3,10 @@
         "name": "wandelhalle.org"
     },
     "links": {
-        "register": {
-            "label": "Registrieren",
-            "slug": "/register"
-        },
-        "login": {
-            "label": "Anmelden",
-            "slug": "/login"
-        },
-        "questions": {
-            "label": "Fragen",
-            "slug": "/questions"
-        },
-        "topics": {
-            "label": "Themen",
-            "slug": "/topics"
-        }
+        "register" : "Registrieren",
+        "login" : "Anmelden",
+        "logout" : "Abmelden",
+        "questions" : "Fragen",
+        "topics" : "Themen"
     }
 }

@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
     $roles = $request->user()->roles()->pluck('name');
-    return response()->json([
-        'user' => $request->user(),
-        'roles' => $roles,
-    ]);
+    $user = $request->user();
+    $user['roles'] = $roles;
+    return response()->json($user);
 })->middleware('auth:sanctum');

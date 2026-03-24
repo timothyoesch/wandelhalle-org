@@ -20,7 +20,14 @@ export default defineNuxtConfig({
         }
     },
 
-    modules: ['@nuxtjs/tailwindcss', '@nuxt/fonts', '@nuxtjs/i18n', '@pinia/nuxt'],
+    modules: [
+      '@nuxtjs/tailwindcss',
+      '@nuxt/fonts',
+      '@nuxtjs/i18n',
+      '@pinia/nuxt',
+      'nuxt-auth-sanctum',
+      '@nuxt/icon'
+    ],
     tailwindcss: {
         exposeConfig: true,
         viewer: true,
@@ -41,5 +48,26 @@ export default defineNuxtConfig({
         ],
         defaultLocale: 'de',
         strategy: 'prefix',
+    },
+    sanctum: {
+        baseUrl: process.env.NUXT_PUBLIC_API_URL || 'https://api.wandelhalle.lndo.site',
+        mode: 'cookie',
+
+
+        redirect: {
+            keepRequestedRoute: false,
+            onAuthOnly: false,
+            onGuestOnly: false,
+            onLogin: false,
+            onLogout: false
+        },
+
+        // Match these strictly to your Laravel api.php and web.php routes
+        endpoints: {
+            csrf: '/sanctum/csrf-cookie',
+            login: '/login',
+            logout: '/logout', // Ensure this is a POST route in Laravel
+            user: '/api/user',
+        }
     }
 })
