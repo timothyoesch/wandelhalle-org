@@ -11,7 +11,7 @@ export default defineNuxtConfig({
                 port: 443
             },
             allowedHosts: [
-                process.env.NUXT_PUBLIC_APP_URL || 'app.wandelhalle.lndo.site'
+                process.env.NUXT_PUBLIC_ALLOWED_HOSTS || 'app.wandelhalle.lndo.site'
             ],
         },
     },
