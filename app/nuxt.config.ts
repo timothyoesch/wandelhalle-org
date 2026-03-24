@@ -10,7 +10,9 @@ export default defineNuxtConfig({
                 host: 'app.wandelhalle.lndo.site',
                 port: 443
             },
-            allowedHosts: ['app.wandelhalle.lndo.site'],
+            allowedHosts: [
+                process.env.NUXT_PUBLIC_APP_URL || 'app.wandelhalle.lndo.site'
+            ],
         },
     },
 
@@ -21,12 +23,12 @@ export default defineNuxtConfig({
     },
 
     modules: [
-      '@nuxtjs/tailwindcss',
-      '@nuxt/fonts',
-      '@nuxtjs/i18n',
-      '@pinia/nuxt',
-      'nuxt-auth-sanctum',
-      '@nuxt/icon'
+        '@nuxtjs/tailwindcss',
+        '@nuxt/fonts',
+        '@nuxtjs/i18n',
+        '@pinia/nuxt',
+        'nuxt-auth-sanctum',
+        '@nuxt/icon'
     ],
     tailwindcss: {
         exposeConfig: true,
