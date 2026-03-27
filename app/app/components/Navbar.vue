@@ -2,10 +2,13 @@
 const {user, isAuthenticated, logout} = useSanctumAuth()
 const localePath = useLocalePath()
 const config = useRuntimeConfig()
+const adminUrl = config.public.apiUrl + '/admin'
+
 async function handleLogout() {
     await logout()
     return navigateTo(localePath('/login'))
 }
+
 </script>
 <template>
     <nav class="waha-navbar py-2 md:py-4 border-b-2 border-accent">
@@ -45,7 +48,7 @@ async function handleLogout() {
                                 <Icon class="text-xl" name="heroicons:user-circle-20-solid" />
                             </NuxtLink>
                             <NuxtLink
-                                :to="config.public.apiUrl + '/admin'"
+                                :to="adminUrl"
                                 class="flex items-center gap-x-1"
                                 v-if="isAuthenticated && user.roles.includes('super_admin')"
                             >
