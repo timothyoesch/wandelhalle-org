@@ -1,0 +1,9 @@
+.waha-tabs {
+    &__tab {
+        @apply cursor-pointer px-4 py-2 border border-b-0 border-primary rounded-t-md;
+
+        &--active {
+            @apply bg-accent text-white border-accent;
+        }
+    }
+}

@@ -18,7 +18,9 @@ class PoliticiansTable
             ->columns([
                 ImageColumn::make('avatar_url')
                     ->searchable(),
-                TextColumn::make('name')
+                TextColumn::make('first_name')
+                    ->searchable(),
+                TextColumn::make('last_name')
                     ->searchable(),
                 TextColumn::make('canton.name')
                     ->searchable(),

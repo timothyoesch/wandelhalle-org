@@ -13,7 +13,6 @@ class CantonSeeder extends Seeder
      */
     public function run(): void
     {
-        // Seeder for all Swiss cantons
         $cantons = [
             ['name' => ["de" => "Aargau", "fr" => "Argovie", "it" => "Argovia"], 'abbreviation' => 'AG'],
             ['name' => ["de" => "Appenzell Ausserrhoden", "fr" => "Appenzell Rhodes-Extérieures", "it" => "Appenzello Esterno"], 'abbreviation' => 'AR'],

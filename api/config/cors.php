@@ -15,11 +15,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie', "/login", "/logout"],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', "/login", "/logout", "/register", "/forgot-password", "/reset-password"],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_URL', 'https://app.test.lndo.site')],
+    'allowed_origins' => [env('APP_FRONTEND_URL', 'https://app.test.lndo.site')],
 
     'allowed_origins_patterns' => [],
 

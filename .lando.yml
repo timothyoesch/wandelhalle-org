@@ -14,6 +14,11 @@ services:
       - cd app && npm install
     command: cd app && NODE_TLS_REJECT_UNAUTHORIZED=0 HOST=0.0.0.0 PORT=80 npm run dev
 
+  mailhog:
+    type: mailhog
+    portforward: false
+
+
 proxy:
   appserver:
     - api.wandelhalle.lndo.site

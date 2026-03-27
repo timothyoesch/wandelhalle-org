@@ -1,0 +1,42 @@
+.waha-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea {
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            @apply border border-gray-300;
+
+            &:focus {
+                outline: none;
+                @apply ring-2 ring-accent;
+            }
+        }
+    }
+
+    &__helper {
+        font-size: 0.875rem;
+        font-style: italic;
+        color: theme("colors.gray.500")
+    }
+
+    button {
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        @apply py-2 px-6 font-bold bg-accent text-white hover:bg-accent-800 transition-colors duration-200;
+
+        &:disabled {
+            @apply bg-gray-400 cursor-not-allowed;
+        }
+    }
+}

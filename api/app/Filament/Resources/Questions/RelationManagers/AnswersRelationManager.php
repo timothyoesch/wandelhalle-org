@@ -27,14 +27,22 @@ class AnswersRelationManager extends RelationManager
         return $schema
             ->components([
                 Select::make('politician_id')
-                    ->relationship('politician', 'name')
+                    ->relationship('politician', 'id')
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->first_name . ' ' . $record->last_name . ' (' . $record->id . ')')
+                    ->searchable(["first_name", "last_name"])
+                    ->native(false)
                     ->required(),
                 Textarea::make('body')
                     ->required()
                     ->columnSpanFull(),
-                TextInput::make('status')
-                    ->required()
-                    ->default('published'),
+                Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'published' => 'Published',
+                        'rejected' => 'Rejected',
+                    ])
+                    ->default('pending')
+                    ->required(),
             ]);
     }
 
@@ -43,7 +51,9 @@ class AnswersRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('politician_id')
             ->columns([
-                TextColumn::make('politician.name')
+                TextColumn::make('politician.first_name')
+                    ->searchable(),
+                TextColumn::make('politician.last_name')
                     ->searchable(),
                 TextColumn::make('status')
                     ->searchable(),

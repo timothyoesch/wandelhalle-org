@@ -97,7 +97,8 @@ class ImportPoliticians extends Command
             $politician = Politician::updateOrCreate(
                 ['slug' => Str::slug($fullName)],
                 [
-                    'name' => $fullName,
+                    'first_name' => $firstName,
+                    'last_name' => $lastName,
                     'canton_id' => $canton->id,
                     'avatar_url' => $avatarPath,
                 ]

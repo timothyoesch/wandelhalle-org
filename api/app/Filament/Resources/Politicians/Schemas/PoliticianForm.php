@@ -15,13 +15,18 @@ class PoliticianForm
             ->components([
                 Select::make('canton_id')
                     ->relationship('canton', 'name'),
-                TextInput::make('name')
+                TextInput::make('first_name')
+                    ->required(),
+                TextInput::make('last_name')
                     ->required(),
                 TextInput::make('slug'),
                 RichEditor::make('bio')
                     ->columnSpanFull(),
                 TextInput::make('avatar_url')
                     ->url(),
+                Select::make("user_id")
+                    ->relationship("user", "name")
+                    ->searchable(),
             ]);
     }
 }

@@ -139,16 +139,16 @@ return [
      */
     'resource' => [
         'table' => [
-            'class' => \TomatoPHP\FilamentUsers\Filament\Resources\Users\Tables\UsersTable::class,
-            'filters' => \TomatoPHP\FilamentUsers\Filament\Resources\Users\Tables\UserFilters::class,
-            'actions' => \TomatoPHP\FilamentUsers\Filament\Resources\Users\Tables\UserActions::class,
-            'bulkActions' => \TomatoPHP\FilamentUsers\Filament\Resources\Users\Tables\UserBulkActions::class,
+            'class' => \App\Filament\Resources\Users\Tables\UsersTable::class,
+            'filters' => \App\Filament\Resources\Users\Tables\UserFilters::class,
+            'actions' => \App\Filament\Resources\Users\Tables\UserActions::class,
+            'bulkActions' => \App\Filament\Resources\Users\Tables\UserBulkActions::class,
         ],
         'form' => [
-            'class' => \TomatoPHP\FilamentUsers\Filament\Resources\Users\Schemas\UserForm::class,
+            'class' => \App\Filament\Resources\Users\Schemas\UserForm::class,
         ],
         'infolist' => [
-            'class' => \TomatoPHP\FilamentUsers\Filament\Resources\Users\Schemas\UserInfolist::class,
+            'class' => \App\Filament\Resources\Users\Schemas\UserInfolist::class,
         ],
     ],
 

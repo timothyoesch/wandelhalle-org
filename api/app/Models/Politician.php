@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Sluggable\HasSlug;
 
 class Politician extends Model
@@ -19,10 +20,12 @@ class Politician extends Model
      */
     protected $fillable = [
         'canton_id',
-        'name',
+        'first_name',
+        'last_name',
         'slug',
         'bio',
         'avatar_url',
+        'user_id',
     ];
 
     /**
@@ -48,6 +51,11 @@ class Politician extends Model
         return $this->hasMany(Mandate::class);
     }
 
+    public function currentMandate(): HasOne
+    {
+        return $this->hasOne(Mandate::class)->whereNull('end_date')->latestOfMany("start_date");
+    }
+
     public function questions(): HasMany
     {
         return $this->hasMany(Question::class);
@@ -56,6 +64,16 @@ class Politician extends Model
     public function answers(): HasMany
     {
         return $this->hasMany(Answer::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function hasUser(): bool
+    {
+        return $this->user()->exists();
     }
 
     public function getSlugOptions(): \Spatie\Sluggable\SlugOptions

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Questions\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -18,15 +19,29 @@ class QuestionForm
                     ->relationship('user', 'name')
                     ->required(),
                 Select::make('politician_id')
-                    ->relationship('politician', 'name')
+                    ->relationship('politician', 'id')
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->first_name . ' ' . $record->last_name . ' (' . $record->id . ')')
+                    ->searchable(["first_name", "last_name"])
+                    ->native(false)
                     ->required(),
-                TextInput::make('subject'),
+                Select::make('topics')
+                    ->relationship('topics', 'name')
+                    ->searchable()
+                    ->native(false)
+                    ->multiple()
+                    ->required(),
                 Textarea::make('body')
                     ->required()
                     ->columnSpanFull(),
-                TextInput::make('status')
-                    ->required()
-                    ->default('pending'),
+                RichEditor::make('rationale')
+                    ->columnSpanFull(),
+                Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'published' => 'Published',
+                        'rejected' => 'Rejected',
+                    ])
+                    ->required(),
                 DateTimePicker::make('published_at'),
             ]);
     }

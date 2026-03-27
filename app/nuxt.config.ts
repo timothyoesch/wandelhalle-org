@@ -50,6 +50,9 @@ export default defineNuxtConfig({
         ],
         defaultLocale: 'de',
         strategy: 'prefix',
+        compilation: {
+            strictMessage: false
+        }
     },
     sanctum: {
         baseUrl: process.env.NUXT_PUBLIC_API_URL || 'https://api.wandelhalle.lndo.site',

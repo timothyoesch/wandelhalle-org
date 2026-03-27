@@ -3,10 +3,90 @@
         "name": "wandelhalle.org"
     },
     "links": {
-        "register" : "Registrieren",
-        "login" : "Anmelden",
-        "logout" : "Abmelden",
-        "questions" : "Fragen",
-        "topics" : "Themen"
+        "register": "Registrieren",
+        "login": "Anmelden",
+        "logout": "Abmelden",
+        "backend_login": "Admin-Bereich",
+        "questions": "Fragen",
+        "topics": "Themen"
+    },
+    "pages": {
+        "login": {
+            "title": "Einloggen",
+            "registerPrompt": "Hast du noch keinen Account?",
+            "registerLink": "Hier registrieren",
+            "forgotPassword": "Passwort vergessen?",
+            "politicianPrompt": "Sind Sie Politiker:in und haben noch keinen Account?",
+            "politicianLink": "Nutzen Sie dieses Formular, um Ihren Account zu aktivieren."
+        },
+        "register": {
+            "title": "Registrieren",
+            "loginPrompt": "Hast du schon einen Account?",
+            "loginLink": "Hier einloggen",
+            "politicianPrompt": "Sind Sie Politiker:in und haben noch keinen Account?",
+            "politicianLink": "Nutzen Sie dieses Formular, um Ihren Account zu aktivieren."
+        },
+        "forgotPassword": {
+            "title": "Passwort zurücksetzen",
+            "description": "Gib deine E-Mail-Adresse ein, um Anweisungen zum Zurücksetzen deines Passworts zu erhalten.",
+            "successMessage": "Wenn deine E-Mail-Adresse registriert ist, erhältst du in Kürze einen Link zum Zurücksetzen deines Passworts."
+        },
+        "resetPassword": {
+            "title": "Neues Passwort festlegen",
+            "newPassword": "Neues Passwort",
+            "confirmPassword": "Neues Passwort bestätigen",
+            "submit": "Passwort zurücksetzen"
+        },
+        "register-politician": {
+            "title": "Als Politiker:in registrieren",
+            "description": "Wenn für Sie bereits ein Politiker:innen-Profil auf unserer Plattform existiert, können Sie Ihren Account mit diesem Formular aktivieren.",
+            "note": "Wenn für Sie noch kein Profil existiert, schreiben Sie uns bitte eine Nachricht auf <a href=\"mailto:politiker_innen{'@'}wandelhalle.org\" class=\"text-accent hover:underline\">politiker_innen{'@'}wandelhalle.org</a> mit Ihrem Namen, Ihrer E-Mail-Adresse und einem Link zu Ihrem Profil auf der Webseite Ihres Parlaments.",
+            "nameLabel": "Name",
+            "emailLabel": "E-Mail-Adresse",
+            "emailHelper": "Damit wir sicherstellen können, dass Sie tatsächlich die angegebene Politiker:in sind, benötigen wir diejenige E-Mail-Adresse, die mit Ihrem Profil auf der Webseite Ihres Parlaments verknüpft ist.",
+            "messageLabel": "Nachricht",
+            "submit": "Anfrage senden"
+        },
+        "index": {
+            "title": {
+                "line1": "Willkommen in der",
+                "line2": "Wandelhalle"
+            },
+            "cta": {
+                "placeholder": "Was möchtest du von der Politik wissen?",
+                "submit": "Frage stellen",
+                "error": {
+                    "too_long": "Deine Frage ist zu lang. Bitte kürze sie auf maximal 400 Zeichen.",
+                    "empty": "Deine Frage darf nicht leer sein."
+                }
+            },
+            "latestQuestions": {
+                "title": "Aktuelle Fragen und Antworten"
+            }
+        }
+    },
+    "components": {
+        "latestQuestions": {
+            "tabs": {
+                "questions": "Fragen",
+                "answers": "Antworten"
+            }
+        },
+        "questions": {
+            "card": {
+                "details": {
+                    "from": "Frage von"
+                },
+                "answer": {
+                    "details": {
+                        "answered": [
+                            "Antwort vom",
+                            "von"
+                        ],
+                        "not_answered": "Frage noch nicht beantwortet – adressiert an"
+                    }
+                }
+            }
+        }
     }
 }
