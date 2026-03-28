@@ -1,5 +1,8 @@
 <script setup>
-import { onMounted } from 'vue'
+import ThumbIcon from './ThumbIcon.vue'
+const client = useSanctumClient()
+const { isAuthenticated } = useSanctumAuth()
+const localePath = useLocalePath()
 
 const props = defineProps({
     question: {
@@ -15,9 +18,44 @@ const getExcerpt = (text, maxLength = 200) => {
     return text.substring(0, maxLength) + '...'
 }
 
+const voteStatus = ref(props.question.upvoted ? 'like' : props.question.downvoted ? 'dislike' : null)
+const upvotesCount = ref(props.question.upvotes_count)
+const downvotesCount = ref(props.question.downvotes_count)
+
+const handleVote = (type) => {
+    if (!isAuthenticated.value) {
+        return navigateTo(localePath('/login'))
+    }
+    if (voteStatus.value === 'like') {
+        upvotesCount.value -= 1
+    } else if (voteStatus.value === 'dislike') {
+        downvotesCount.value -= 1
+    }
+    if (voteStatus.value === type) {
+        voteStatus.value = null
+    } else {
+        voteStatus.value = type
+    }
+    if (voteStatus.value === 'like') {
+        upvotesCount.value += 1
+    } else if (voteStatus.value === 'dislike') {
+        downvotesCount.value += 1
+    }
+    try {
+        client("/api/questions/" + props.question.id + "/vote", {
+            method: "POST",
+            body: {
+                type: voteStatus.value
+            }
+        })
+    } catch (error) {
+        console.error("Error voting:", error)
+    }
+}
+
 </script>
 <template>
-    <div class="waha-question-card bg-white shadow-md rounded-md">
+    <div class="waha-question-card bg-white shadow-md rounded-md overflow-hidden">
         <div class="waha-question-card__question-container bg-accent-50 p-4 md:p-6">
             <div class="waha-question-card__question-details flex gap-x-4 text-sm italic">
                 <span>{{$t("components.questions.card.details.from")}} {{ props.question.user.public_name }}</span>
@@ -33,8 +71,8 @@ const getExcerpt = (text, maxLength = 200) => {
         <div class="waha-question-card__answer-container p-4 md:p-6">
             <div class="waha-question-card__answer__politician">
                 <div class="flex gap-x-4">
-                    <div class="waha-question-card__answer__politician-avatar flex-shrink-0 w-16">
-                        <img :src="props.question.politician.avatar_url" alt="Avatar" class="rounded-full w-16 h-16 overflow-hidden">
+                    <div class="waha-question-card__answer__politician-avatar flex-shrink-0 w-12">
+                        <img :src="props.question.politician.avatar_url" alt="Avatar" class="rounded-full w-12 h-12 overflow-hidden">
                     </div>
                     <div class="waha-question-card__answer__politician-details text-sm">
                         <div
@@ -59,18 +97,34 @@ const getExcerpt = (text, maxLength = 200) => {
                                     class="w-3 h-3 rounded-full"
                                     :style="'background-color: ' + props.question.politician.party_color"
                                 ></div>
-                                <span>{{ props.question.politician.party_name }}</span>
+                                <span>{{ props.question.politician.party_abbreviation }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <p
-                class="waha-question-card__answer-body mt-4 md:mt-2 text-lg md:text-xl md:pl-20"
+                class="waha-question-card__answer-body mt-4 md:mt-2 text-lg md:text-xl md:pl-16"
                 v-if="props.question.answers.length > 0"
             >
                 {{ getExcerpt(props.question.answers[0].body) }}
             </p>
+        </div>
+        <div class="waha-question-card__actions-container p-4 md:p-6 bg-gray-200">
+            <div class="waha-question-card__actions flex gap-x-4">
+                <ThumbIcon
+                    :type="'like'"
+                    :count="upvotesCount"
+                    :active="voteStatus === 'like'"
+                    v-on:click="handleVote('like')"
+                />
+                <ThumbIcon
+                    :type="'dislike'"
+                    :count="downvotesCount"
+                    :active="voteStatus === 'dislike'"
+                    v-on:click="handleVote('dislike')"
+                />
+            </div>
         </div>
     </div>
 </template>

@@ -28,21 +28,23 @@ async function handleForgotPassword() {
 
 </script>
 <template>
-    <h1 class="text-2xl md:text-4xl font-bold mb-2">{{ $t('pages.forgotPassword.title') }}</h1>
-    <p class="mb-4">{{ $t('pages.forgotPassword.description') }}</p>
-    <form class="waha-form" @submit.prevent="handleForgotPassword" v-if="!message">
-        <div class="waha-form__group">
-            <label for="email">Email</label>
-            <input
-                v-model="body.email"
-                id="email"
-                type="email"
-                required
-            />
-        </div>
-        <button type="submit" class="waha-button waha-button--primary">
-            {{ $t('pages.forgotPassword.submit') }}
-        </button>
-    </form>
-    <p v-else class="text-accent">{{ message }}</p>
+    <div>
+        <h1 class="text-2xl md:text-4xl font-bold mb-2">{{ $t('pages.forgotPassword.title') }}</h1>
+        <p class="mb-4">{{ $t('pages.forgotPassword.description') }}</p>
+        <form class="waha-form" @submit.prevent="handleForgotPassword" v-if="!message">
+            <div class="waha-form__group">
+                <label for="email">Email</label>
+                <input
+                    v-model="body.email"
+                    id="email"
+                    type="email"
+                    required
+                />
+            </div>
+            <button type="submit" class="waha-button waha-button--primary-950">
+                {{ $t('pages.forgotPassword.submit') }}
+            </button>
+        </form>
+        <p v-else class="text-accent-500">{{ message }}</p>
+    </div>
 </template>

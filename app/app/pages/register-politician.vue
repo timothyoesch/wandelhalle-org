@@ -65,7 +65,7 @@ const handleRegister = async () => {
                     v-model="credentials.password_confirmation"
                     required />
             </div>
-            <button type="submit" class="waha-button waha-button--primary mt-4">
+            <button type="submit" class="waha-button waha-button--primary-950 mt-4">
                 {{ $t('pages.register-politician.submit') }}
             </button>
         </form>

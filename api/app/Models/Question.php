@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\PublishedStatusScope;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
 
+#[ScopedBy(PublishedStatusScope::class)]
 class Question extends Model
 {
     use HasFactory, HasUuids;

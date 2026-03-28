@@ -23,7 +23,7 @@ onMounted(() => {
 })
 
 async function handleSubmit() {
-    if (form.body.length === 0 || form.body.length > 400) {
+    if (form.body.length === 0 || form.body.length > 200) {
         errors.value.body = [form.body.length === 0 ? 'empty' : 'too_long']
         return
     }
@@ -35,10 +35,10 @@ async function handleSubmit() {
 </script>
 
 <template>
-    <div class="waha-container__inner pb-40">
+    <div class="waha-container__inner">
         <div class="waha-index__heroine text-center">
             <h2 class="text-xl md:text-2xl">{{ $t('pages.index.title.line1') }}</h2>
-            <h1 class="text-4xl md:text-7xl font-black text-accent italic">{{ $t('pages.index.title.line2') }}</h1>
+            <h1 class="text-4xl md:text-[7vw] underline md:leading-[1] font-black text-accent-500 italic">{{ $t('pages.index.title.line2') }}</h1>
         </div>
         <div class="waha-index__cta mt-8">
             <form @submit.prevent="handleSubmit" class="waha-form">
@@ -49,9 +49,9 @@ async function handleSubmit() {
                 <div class="flex justify-between">
                     <span
                         class="text-sm text-gray-500"
-                        :class="form.body.length > 400 ? 'text-red-500' : ''"
+                        :class="form.body.length > 200 ? 'text-red-500' : ''"
                     >
-                        {{ form.body.length }} / 400
+                        {{ form.body.length }} / 200
                     </span>
                     <button type="submit" class="w-fit mt-4">{{ $t('pages.index.cta.submit') }}</button>
                 </div>

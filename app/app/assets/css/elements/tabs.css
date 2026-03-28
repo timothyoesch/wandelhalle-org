@@ -1,0 +1,10 @@
+.waha-tabs {
+    .waha-tabs__tab {
+        @apply cursor-pointer px-4 py-2 border border-b-0 border-primary-950 rounded-t-md;
+
+    }
+
+    .waha-tabs__tab--active {
+        @apply bg-accent-500 text-white border-accent-500;
+    }
+}

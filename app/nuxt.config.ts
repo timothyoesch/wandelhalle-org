@@ -23,25 +23,28 @@ export default defineNuxtConfig({
     },
 
     modules: [
-        '@nuxtjs/tailwindcss',
-        '@nuxt/fonts',
+        "@nuxt/fonts",
         '@nuxtjs/i18n',
         '@pinia/nuxt',
         'nuxt-auth-sanctum',
-        '@nuxt/icon'
+        '@nuxt/icon',
+        '@nuxt/ui',
     ],
-    tailwindcss: {
-        exposeConfig: true,
-        viewer: true,
-    },
     fonts: {
         families: [
             {
                 name: 'Inter',
-                provider: "npm"
+                provider: 'google',
+                // You can explicitly list weights here if you want to be safe,
+                // but it usually auto-detects them based on your Tailwind usage!
+                weights: [400, 500, 600, 700, 900],
             }
         ]
     },
+    css: [
+        '~/assets/css/main.css',
+        '~/assets/css/app.css',
+    ],
     i18n: {
         locales: [
             { code: 'de', name: 'Deutsch', file: 'de.json' },

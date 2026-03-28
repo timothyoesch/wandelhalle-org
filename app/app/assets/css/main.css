@@ -1,0 +1,33 @@
+/* assets/scss/main.scss */
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+/* 1. Set your custom font */
+@theme {
+    --font-sans: 'Inter', sans-serif;
+    /* Your Primary Color Scale */
+    --color-primary-50: #eff9ff;
+    --color-primary-100: #dff3ff;
+    --color-primary-200: #b8e8ff;
+    --color-primary-300: #78d5ff;
+    --color-primary-400: #31c2ff;
+    --color-primary-500: #06abf1;
+    --color-primary-600: #008bce;
+    --color-primary-700: #006ea7;
+    --color-primary-800: #025c8a;
+    --color-primary-900: #084c72;
+    --color-primary-950: #052b43;
+
+    /* Your Accent Color Scale */
+    --color-accent-50: #f2fbf9;
+    --color-accent-100: #d3f4ec;
+    --color-accent-200: #a7e8da;
+    --color-accent-300: #74d4c2;
+    --color-accent-400: #47baa8;
+    --color-accent-500: #2fa494;
+    --color-accent-600: #227f74;
+    --color-accent-700: #1f665f;
+    --color-accent-800: #1d524d;
+    --color-accent-900: #1c4541;
+    --color-accent-950: #0b2827;
+}

@@ -42,7 +42,7 @@ return [
      * if you are using filament impersonate, you can set this to true.
      */
     'impersonate' => [
-        'enabled' => false,
+        'enabled' => true,
         'banner' => [
             // Available hooks: https://filamentphp.com/docs/3.x/support/render-hooks#available-render-hooks
             'render_hook' => env('FILAMENT_IMPERSONATE_BANNER_RENDER_HOOK', 'panels::body.start'),

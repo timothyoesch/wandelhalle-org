@@ -50,7 +50,7 @@ async function handleResetPassword() {
                     required
                 />
             </div>
-            <button type="submit" class="waha-button waha-button--primary">
+            <button type="submit" class="waha-button waha-button--primary-950">
                 {{ $t('pages.resetPassword.submit') }}
             </button>
         </form>

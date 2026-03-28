@@ -31,55 +31,57 @@ async function handleLogin() {
 </script>
 
 <template>
-    <h1 class="text-2xl md:text-4xl font-bold mb-2">{{ $t('pages.login.title') }}</h1>
-    <p>
-        {{ $t('pages.login.registerPrompt') }}
-        <NuxtLink :to="$localePath('/register')" class="text-accent hover:underline">
-            {{ $t('pages.login.registerLink') }}
-        </NuxtLink>
-    </p>
-    <p class="mb-2">
-        <NuxtLink :to="$localePath('/forgot-password')" class="text-accent hover:underline">
-            {{ $t('pages.login.forgotPassword') }}
-        </NuxtLink>
-    </p>
-
-    <form @submit.prevent="handleLogin" class="waha-form">
-        <div class="waha-form__group">
-            <label for="email">Email</label>
-            <input
-                id="email"
-                v-model="credentials.email"
-                type="email"
-                required
-            />
-            <p v-if="errors.email" style="color: red; font-size: 0.8em;">
-                {{ errors.email[0] }}
-            </p>
-        </div>
-
-        <div class="waha-form__group">
-            <label for="password">Password</label>
-            <input
-                id="password"
-                v-model="credentials.password"
-                type="password"
-                required
-            />
-            <p v-if="errors.password" style="color: red; font-size: 0.8em;">
-                {{ errors.password[0] }}
-            </p>
-        </div>
-
-        <p v-if="errors.general" style="color: red; font-size: 0.8em;">
-            {{ errors.general[0] }}
+    <div>
+        <h1 class="text-2xl md:text-4xl font-bold mb-2">{{ $t('pages.login.title') }}</h1>
+        <p>
+            {{ $t('pages.login.registerPrompt') }}
+            <NuxtLink :to="$localePath('/register')" class="text-accent-500 hover:underline">
+                {{ $t('pages.login.registerLink') }}
+            </NuxtLink>
         </p>
-        <button type="submit">Log In</button>
-    </form>
-    <p class="text-gray-400 text-sm mt-4">
-        {{ $t('pages.login.politicianPrompt') }}
-        <NuxtLink :to="$localePath('/register-politician')" class="text-accent hover:underline">
-            {{ $t('pages.login.politicianLink') }}
-        </NuxtLink>
-    </p>
+        <p class="mb-2">
+            <NuxtLink :to="$localePath('/forgot-password')" class="text-accent-500 hover:underline">
+                {{ $t('pages.login.forgotPassword') }}
+            </NuxtLink>
+        </p>
+
+        <form @submit.prevent="handleLogin" class="waha-form">
+            <div class="waha-form__group">
+                <label for="email">Email</label>
+                <input
+                    id="email"
+                    v-model="credentials.email"
+                    type="email"
+                    required
+                />
+                <p v-if="errors.email" style="color: red; font-size: 0.8em;">
+                    {{ errors.email[0] }}
+                </p>
+            </div>
+
+            <div class="waha-form__group">
+                <label for="password">Password</label>
+                <input
+                    id="password"
+                    v-model="credentials.password"
+                    type="password"
+                    required
+                />
+                <p v-if="errors.password" style="color: red; font-size: 0.8em;">
+                    {{ errors.password[0] }}
+                </p>
+            </div>
+
+            <p v-if="errors.general" style="color: red; font-size: 0.8em;">
+                {{ errors.general[0] }}
+            </p>
+            <button type="submit">Log In</button>
+        </form>
+        <p class="text-gray-400 text-sm mt-4">
+            {{ $t('pages.login.politicianPrompt') }}
+            <NuxtLink :to="$localePath('/register-politician')" class="text-accent-500 hover:underline">
+                {{ $t('pages.login.politicianLink') }}
+            </NuxtLink>
+        </p>
+    </div>
 </template>

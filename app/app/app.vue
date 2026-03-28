@@ -1,5 +1,4 @@
 <script setup>
-import "@/css/app.scss"
 const { locale, setLocale } = useI18n()
 setLocale(locale.value)
 
@@ -14,7 +13,9 @@ onMounted(() => {
 })
 </script>
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+    <UApp>
+        <NuxtLayout>
+            <NuxtPage />
+        </NuxtLayout>
+    </UApp>
 </template>

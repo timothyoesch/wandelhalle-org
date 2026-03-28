@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\QuestionResource;
 use App\Models\Question;
+use App\Models\Vote;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use App\Http\Resources\QuestionResource;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class QuestionController extends Controller
 {
@@ -16,18 +18,16 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $params = $this->prepareQueryParams(request());
-        // Get order type
-        $orderBy = request()->query('order_by', 'question');
-        $questions = Question::with($params['relations'])
-            ->where('status', 'published')
-            ->withCount($params['relations_count']);
-        if ($orderBy === 'question') {
-            $questions = $questions->orderBy('created_at', 'desc');
-        } elseif ($orderBy === 'answers') {
-            $questions = $questions->whereHas('answers');
-            $questions = $questions->withAggregate('answers', 'created_at')
-                ->orderBy('answers_created_at', 'DESC');
+        $query = Question::query()->withAggregate('answers', 'created_at');
+        $questions = QueryBuilder::for($query)
+            ->allowedIncludes('answers', 'topics', 'politician', 'politician.currentMandate', 'user')
+            ->allowedFilters('body', 'user.name', 'politician.id', 'topics.name')
+            ->allowedSorts('created_at', 'answers_created_at')
+            ->withCount(['upvotes', 'downvotes']);
+
+        //if sort query string contains answers_created_at, only return questions that have at least one answer
+        if (str_contains(request()->query('sort', ''), 'answers_created_at')) {
+            $questions = $questions->has('answers');
         }
         // Check if user can be authenticated and if so, add upvoted and downvoted counts
         if (auth("sanctum")->check()) {
@@ -37,7 +37,10 @@ class QuestionController extends Controller
                 $query->where('user_id', auth("sanctum")->id());
             }]);
         }
-        $questions = $questions->paginate($params['per_page'], ['*'], 'page', $params['page']);
+        $questions = $questions
+            ->paginate(request()->query('per_page', 10))
+            ->onEachSide(1)
+            ->withQueryString();
         return QuestionResource::collection($questions);
     }
 
@@ -108,5 +111,34 @@ class QuestionController extends Controller
             'relations' => explode(',', $relations),
             'relations_count' => explode(',', $relations_count),
         ];
+    }
+
+    public function vote(Request $request, Question $question)
+    {
+        $validated = $request->validate([
+            'type' => 'nullable|in:like,dislike',
+        ]);
+        $user = $request->user();
+        if ($validated['type'] === null) {
+            Vote::where('user_id', $user->id)
+                ->where('question_id', $question->id)
+                ->delete();
+            return response()->json([
+                'message' => 'Vote removed successfully',
+            ]);
+        }
+        $is_upvote = $validated['type'] === 'like';
+        Vote::updateOrCreate(
+            [
+                'user_id' => $user->id,
+                'question_id' => $question->id,
+            ],
+            [
+                'is_upvote' => $is_upvote,
+            ]
+        );
+        return response()->json([
+            'message' => 'Vote recorded successfully',
+        ]);
     }
 }

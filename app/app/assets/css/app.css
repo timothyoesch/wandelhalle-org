@@ -1,0 +1,12 @@
+@reference "./main.css";
+@import "./elements/forms.css";
+@import "./elements/buttons.css";
+@import "./elements/tabs.css";
+@import "./elements/layouts.css";
+@import "./fixes.css";
+
+
+html {
+    font-family: var(--font-sans);
+    color: var(--color-primary-950);
+}

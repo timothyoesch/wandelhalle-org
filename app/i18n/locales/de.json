@@ -8,7 +8,8 @@
         "logout": "Abmelden",
         "backend_login": "Admin-Bereich",
         "questions": "Fragen",
-        "topics": "Themen"
+        "topics": "Themen",
+        "mobile_menu": "Menü"
     },
     "pages": {
         "login": {
@@ -63,6 +64,10 @@
             "latestQuestions": {
                 "title": "Aktuelle Fragen und Antworten"
             }
+        },
+        "questions": {
+            "title": "Fragen",
+            "new": "Neue Frage stellen"
         }
     },
     "components": {

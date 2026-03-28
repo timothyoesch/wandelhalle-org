@@ -1,0 +1,9 @@
+.waha-button {
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    @apply py-2 px-6 font-bold bg-accent-500 text-white hover:bg-accent-800 transition-colors duration-200 w-fit h-fit;
+
+    &:disabled {
+        @apply bg-gray-400 cursor-not-allowed;
+    }
+}

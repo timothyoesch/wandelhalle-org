@@ -23,6 +23,7 @@ class UserActions
             Actions\EditAction::make(),
             Actions\ChangePassword::make(),
             Actions\DeleteAction::make(),
+            Actions\ImpersonateAction::make(),
         ];
     }
 
