@@ -77,5 +77,8 @@ export default defineNuxtConfig({
             logout: '/logout', // Ensure this is a POST route in Laravel
             user: '/api/user',
         }
+    },
+    ui: {
+        colorMode: false
     }
 })
