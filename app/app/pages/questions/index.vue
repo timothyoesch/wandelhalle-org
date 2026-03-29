@@ -13,11 +13,11 @@ definePageMeta({
                 :to="$localePath('/questions/new')"
                 class="waha-button"
             >
-                {{ $t('pages.questions.new') }}
+                {{ $t('pages.questions.new.button') }}
             </NuxtLink>
         </div>
         <div class="mt-8">
-            <List />
+            <List :key="$route.fullPath"/>
         </div>
     </div>
 </template>

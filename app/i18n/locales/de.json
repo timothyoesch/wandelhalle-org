@@ -67,7 +67,15 @@
         },
         "questions": {
             "title": "Fragen",
-            "new": "Neue Frage stellen"
+            "new": {
+                "button": "Neue Frage stellen",
+                "title": "Stelle deine Frage",
+                "politicianLabel": "An welche:n Politiker:in möchtest du deine Frage richten?",
+                "questionLabel": "Formuliere deine Frage",
+                "rationaleLabel": "Begründe deine Frage kurz oder füge weitere Informationen hinzu",
+                "topicsLabel": "Wähle relevante Themen aus",
+                "submit": "Frage stellen"
+            }
         }
     },
     "components": {
@@ -75,6 +83,18 @@
             "tabs": {
                 "questions": "Fragen",
                 "answers": "Antworten"
+            }
+        },
+        "form": {
+            "politicianMenu": {
+                "placeholder": "Politiker:in suchen...",
+                "searching": "Suche läuft...",
+                "noResults": "Keine Politiker:innen gefunden."
+            },
+            "topicMenu": {
+                "placeholder": "Themen auswählen...",
+                "searching": "Suche läuft...",
+                "noResults": "Keine Themen gefunden."
             }
         },
         "questions": {

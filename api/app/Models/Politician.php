@@ -38,6 +38,8 @@ class Politician extends Model
         return [
             'id' => 'integer',
             'canton_id' => 'integer',
+            'first_name' => 'string',
+            'last_name' => 'string',
         ];
     }
 

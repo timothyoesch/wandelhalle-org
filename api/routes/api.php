@@ -14,9 +14,14 @@ Route::get('/user', function (Request $request) {
 Route::prefix("questions")->group(function () {
     Route::get('/', [QuestionController::class, 'index']);
     Route::post('/', [QuestionController::class, 'store'])->middleware('auth:sanctum');
-    Route::get('/{question}', [QuestionController::class, 'show']);
-    Route::put('/{question}', [QuestionController::class, 'update'])->middleware('auth:sanctum');
-    Route::delete('/{question}', [QuestionController::class, 'destroy'])->middleware('auth:sanctum');
 
     Route::post('/{question}/vote', [QuestionController::class, 'vote'])->middleware('auth:sanctum');
+});
+
+Route::prefix("politicians")->group(function () {
+    Route::get('/', [\App\Http\Controllers\Api\PoliticianController::class, 'index']);
+});
+
+Route::prefix("topics")->group(function () {
+    Route::get('/', [\App\Http\Controllers\Api\TopicController::class, 'index']);
 });

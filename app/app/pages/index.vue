@@ -29,7 +29,7 @@ async function handleSubmit() {
     }
 
     localStorage.setItem('current_question_body', form.body)
-    alert("Question submission folgt!")
+    await navigateTo(localePath('/questions/new'))
 }
 
 </script>

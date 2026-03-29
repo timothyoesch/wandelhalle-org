@@ -51,11 +51,17 @@ class QuestionController extends Controller
     {
         $validated = $request->validate([
             'body' => 'required|string',
+            'politician_id' => 'nullable|exists:politicians,id',
+            'rationale' => 'nullable|string',
+            'topics' => 'nullable|array',
+            'topics.*' => 'exists:topics,id',
         ]);
-        $question = Question::create([
-            'user_id' => $request->user()->id,
-            'body' => $validated['body'],
-        ]);
+        $question = new Question($validated);
+        $question->user_id = $request->user()->id;
+        $question->save();
+        if (isset($validated['topics'])) {
+            $question->topics()->sync($validated['topics']);
+        }
         return response()->json($question, 201);
     }
 

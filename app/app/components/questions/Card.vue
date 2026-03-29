@@ -61,7 +61,7 @@ const handleVote = (type) => {
                 <span>{{$t("components.questions.card.details.from")}} {{ props.question.user.public_name }}</span>
                 <span class="flex items-center gap-1">
                     <Icon name="heroicons:calendar-20-solid" />
-                    {{ new Date(props.question.created_at).toLocaleDateString() }}
+                    {{ new Date(props.question.created_at).toLocaleDateString("de-CH") }}
                 </span>
             </div>
             <p class="waha-question-card__question-body text-xl md:text-2xl mt-2">
@@ -81,7 +81,7 @@ const handleVote = (type) => {
                             <p
                                 v-if="props.question.answers.length > 0"
                             >
-                                {{ $t("components.questions.card.answer.details.answered.0") }} <b>{{ new Date(props.question.answers[0].created_at).toLocaleDateString() }}</b> {{ $t("components.questions.card.answer.details.answered.1") }} <b>{{ props.question.politician.first_name }} {{ props.question.politician.last_name }}</b></p>
+                                {{ $t("components.questions.card.answer.details.answered.0") }} <b>{{ new Date(props.question.answers[0].created_at).toLocaleDateString("de-CH") }}</b> {{ $t("components.questions.card.answer.details.answered.1") }} <b>{{ props.question.politician.first_name }} {{ props.question.politician.last_name }}</b></p>
                             <div
                                 class="flex md:items-center gap-x-1"
                                 v-else

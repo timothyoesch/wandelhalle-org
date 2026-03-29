@@ -1,12 +1,13 @@
 <script setup>
 import { ref, computed } from 'vue'
 import Card from './Card.vue'
+const route = useRoute()
 
 const props = defineProps({
     query: {
         type: String,
         required: false,
-        default: '/api/questions?include=politician,answers,topics,user',
+        default: '/api/questions?include=politician,answers,topics,user&page=1&sort=-created_at',
     },
 })
 
@@ -15,7 +16,7 @@ const currentPage = ref(1)
 
 // 2. useAsyncData handles the SSR, caching, and loading state automatically
 const { data: response, pending, error } = await useAsyncData(
-    'questions-list', // A unique key for caching this request
+    `questions-list-${route.fullPath}`,
     () => {
         const separator = props.query.includes('?') ? '&' : '?'
         const fetchUrl = `${props.query}${separator}page=${currentPage.value}`
