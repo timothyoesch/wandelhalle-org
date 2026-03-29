@@ -16,7 +16,7 @@ const currentPage = ref(1)
 
 // 2. useAsyncData handles the SSR, caching, and loading state automatically
 const { data: response, pending, error } = await useAsyncData(
-    `questions-list-${route.fullPath}`,
+    `questions-list-${route.fullPath}-${currentPage.value}`,
     () => {
         const separator = props.query.includes('?') ? '&' : '?'
         const fetchUrl = `${props.query}${separator}page=${currentPage.value}`
@@ -38,6 +38,10 @@ const pagination = computed(() => ({
     perPage: response.value?.meta?.per_page || 10,
     totalItems: response.value?.meta?.total || 0,
 }))
+
+watch(() => props.query, () => {
+    currentPage.value = 1
+})
 
 const questionsListDOM = ref(null)
 
